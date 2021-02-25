@@ -11,16 +11,18 @@
          </a-card>
       </div>
         <b-list-group>
-            <b-list-group-item v-for="twoot in user.twoots" :key="twoot.id">{{twoot.content}}</b-list-group-item>
+            <TwootItem v-for="twoot in user.twoots" :key="twoot.id" :userName="user.userName" :twoot="twoot" :email="user.email"/>
         </b-list-group>
     </a-row>
 
 </template>
 
 <script>
+import TwootItem from "./TwootItem";
 
 export default {
-  name: 'App',
+  name: 'UserProfile',
+  components: { TwootItem },
   data() {
     return {
       followers: 0,
