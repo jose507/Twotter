@@ -11,7 +11,14 @@
          </a-card>
       </div>
         <b-list-group>
-            <TwootItem v-for="twoot in user.twoots" :key="twoot.id" :userName="user.userName" :twoot="twoot" :email="user.email"/>
+            <TwootItem
+                v-for="twoot in user.twoots"
+                :key="twoot.id"
+                :userName="user.userName"
+                :twoot="twoot"
+                :email="user.email"
+                @favourite="toggleFavourite"
+            />
         </b-list-group>
     </a-row>
 
@@ -58,6 +65,9 @@ export default {
   methods: {
     followUser() {
       this.followers++
+    },
+    toggleFavourite(id) {
+        console.log(`Favourite Tweet ${id}`)
     }
   },
   mounted() {

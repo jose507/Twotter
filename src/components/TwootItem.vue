@@ -1,5 +1,5 @@
 <template>
-    <b-list-group>
+    <b-list-group @click="favouriteTwoot(twoot.id)">
         <div>
             <b-card :title="userName" :sub-title="email">
                 <b-card-text>
@@ -27,6 +27,11 @@ export default {
         type: Object,
         required: true
     }
+  },
+  methods: {
+      favouriteTwoot(id) {
+          this.$emit('favourite', id)
+      }
   }
 };
 </script>
