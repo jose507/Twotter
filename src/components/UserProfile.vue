@@ -1,49 +1,30 @@
 <template>
-    <a-row type="flex" justify="center">
-      <div class= "" style="background:#ECECEC; padding:30px">
-        <a-card title="User Profile" :bordered="false" style="width: 360px;">
-            <h4>{{user.userName}}</h4>
-            <h4>{{fullName}}</h4>
-            <h4>{{user.email}}</h4>
-            <h5><b-badge href="#" variant="success" v-if="user.isAdmin">Admin</b-badge></h5>
-            <h4><strong>Followers: </strong>{{followers}}</h4>
+	<a-row type="flex" justify="center">
+		<div class="" style="background:#ECECEC; padding:30px">
+			<a-card :title="this.user.userName" :bordered="false" style="width: 360px;">
+				<h4>{{fullName}}</h4>
+				<h4>{{user.email}}</h4>
+				<h5><b-badge href="#" variant="success" v-if="user.isAdmin">Admin</b-badge></h5>
+				<h4><strong>Followers: </strong>{{followers}}</h4>
 
-
-
-
-            <form class="d-flex flex-column" @submit.prevent="createNewTwoot">
-              <label for="newTwoot"><strong>New Twoot</strong></label>
-              <textarea id="newTwoot" rows="4" v-model="newTwootContent"/>
-
-              <div class="user-profile_create_twoot_type">
-                <label for="newTwootType"><strong>Type</strong></label>
-                <select id="newTwootType" v-model="selectedTwootType">
-                  <option :value="option.value" v-for="(option, index) in twootTypes" :key="index">
-                    {{ option.name }}
-                  </option>
-                </select>
-
-              </div>
-                <button>Twoot</button>
-            </form>
-
-
-
-         </a-card>
-      </div>
-        <b-list-group>
-            <TwootItem
-                v-for="twoot in user.twoots"
-                :key="twoot.id"
-                :userName="user.userName"
-                :twoot="twoot"
-                :email="user.email"
-                @favourite="toggleFavourite"
-            />
-        </b-list-group>
-    </a-row>
-
+        <form class="d-flex flex-column form-group" @submit.prevent="createNewTwoot">
+					<label for="newTwoot"><strong>New Twoot</strong></label>
+					<textarea id="newTwoot" class="form-control" rows="4" v-model="newTwootContent" />
+					<div class="user-profile_create_twoot_type">
+						<label for="newTwootType"><strong>Type</strong></label>
+						<select id="newTwootType" class="my-2" v-model="selectedTwootType">
+							<option :value="option.value" v-for="(option, index) in twootTypes" :key="index"> {{ option.name }} </option>
+						</select>
+					</div>
+					<button class="my-2">Twoot</button>
+				</form>
+			</a-card>
+		</div>
+		<b-list-group>
+			<TwootItem v-for="twoot in user.twoots" :key="twoot.id" :userName="user.userName" :twoot="twoot" :email="user.email" @favourite="toggleFavourite" /> </b-list-group>
+	</a-row>
 </template>
+
 
 <script>
 import TwootItem from "./TwootItem";
