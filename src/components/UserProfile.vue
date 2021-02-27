@@ -7,7 +7,28 @@
             <h4>{{user.email}}</h4>
             <h5><b-badge href="#" variant="success" v-if="user.isAdmin">Admin</b-badge></h5>
             <h4><strong>Followers: </strong>{{followers}}</h4>
-            <a-button type="primary" class="my-2" @click="followUser">Followers</a-button>
+
+
+
+
+            <form class="d-flex flex-column" @submit.prevent="createNewTwoot">
+              <label for="newTwoot"><strong>New Twoot</strong></label>
+              <textarea id="newTwoot" rows="4" v-model="newTwootContent"/>
+
+              <div class="user-profile_create_twoot_type">
+                <label for="newTwootType"><strong>Type</strong></label>
+                <select id="newTwootType" v-model="selectedTwootType">
+                  <option :value="option.value" v-for="(option, index) in twootTypes" :key="index">
+                    {{ option.name }}
+                  </option>
+                </select>
+
+              </div>
+                <button>Twoot</button>
+            </form>
+
+
+
          </a-card>
       </div>
         <b-list-group>
@@ -32,6 +53,12 @@ export default {
   components: { TwootItem },
   data() {
     return {
+      newTwootContent: '',
+      selectedTwootType: 'instant',
+      twootTypes: [
+        { value: 'draft', name: 'Draft' },
+        { value: 'instant', name: 'Instant Twoot' }
+      ],
       followers: 0,
       user: {
         id: 0,
@@ -68,6 +95,14 @@ export default {
     },
     toggleFavourite(id) {
         console.log(`Favourite Tweet ${id}`)
+    },
+    createNewTwoot() {
+      if (this.newTwootContent && this.selectedTwootType !== 'draft') {
+        this.user.twoots.unshift({
+          id: this.user.twoots.length + 1,
+          content: this.newTwootContent
+        })
+      }
     }
   },
   mounted() {
