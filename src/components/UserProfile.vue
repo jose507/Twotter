@@ -16,7 +16,7 @@
 							<option :value="option.value" v-for="(option, index) in twootTypes" :key="index"> {{ option.name }} </option>
 						</select>
 					</div>
-					<button class="my-2">Twoot</button>
+					<button class="my-2 btn btn-success">Twoot</button>
 				</form>
 			</a-card>
 		</div>
@@ -83,6 +83,7 @@ export default {
           id: this.user.twoots.length + 1,
           content: this.newTwootContent
         })
+        this.newTwootContent = '';
       }
     }
   },
